@@ -9,7 +9,7 @@ public class Sample {
             if (c > input2) 
             child[(c % input2)] = (input2 + (c % input2) + 1);
             else if (val > 0)
-            child[c] = (c+1);
+            // child[c] = (c+1);
             else child[c] = input1;
             c++;
             input1 -= (c);
