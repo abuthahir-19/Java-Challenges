@@ -1,6 +1,10 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Scanner;
 
 class EdgeNode {
@@ -14,6 +18,8 @@ class EdgeNode {
 
 public class ShortestTime {
     static Map <Integer, ArrayList<EdgeNode>> map = new HashMap<>();
+    private static List <Integer> cost = new ArrayList<>();
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
@@ -30,7 +36,8 @@ public class ShortestTime {
         }
         int A = in.nextInt();
         int B = in.nextInt();
-        int res = findShortTimePath (A, B);
+        findPaths(A, B);
+        System.out.println (Collections.min(cost));
         in.close();
     }
 
@@ -48,21 +55,77 @@ public class ShortestTime {
         }
     }
 
-    private static int findShortTimePath (int start, int dest) {
-        if (map.containsKey(start)) {
-            int dist = Integer.MAX_VALUE;
-            ArrayList<EdgeNode> lst = map.get(start);
-            for (EdgeNode value : lst) {
-                int sum = 0;
-                if (value.v == dest) {
-                    if (dist > value.time) {
-                        dist = value.time;
-                    }
-                }else {
-                    sum += value.time;
+    private static void findCost (List <Integer> list) {
+        int c = 0;
+        int s = list.size();
+        for (int i = 0; i < s-1; i++) {
+            int sc = list.get(i), d = list.get(i+1);
+            List<EdgeNode> verteces = map.get(sc);
+            for (EdgeNode node : verteces) {
+                if (node.v == d) {
+                    c += node.time;
+                    break;
                 }
             }
         }
-        return 0;
+        cost.add(c);
     }
+
+    private static boolean isNotVisited (int key, List <Integer> path) {
+        int size = path.size();
+        for (int i = 0; i < size; i++) {
+            if (path.get(i) == key) return false;
+        }
+        return true;
+    }
+
+    private static void findPaths (int src, int dest) {
+        Queue <List<Integer>> queue = new LinkedList<>();
+        List <Integer> path = new ArrayList<>();
+        path.add(src);
+        queue.add(path);
+
+        while (!queue.isEmpty()) {
+            path = queue.poll();
+            int last = path.get(path.size()-1);
+            if (last == dest) {
+                findCost(path);
+            }
+            if (map.containsKey(last)) {
+                List<EdgeNode> lastNode = map.get(last);
+                for (int i = 0; i < lastNode.size(); i++) {
+                    if (isNotVisited(lastNode.get(i).v, path)) {
+                        List<Integer> newPath = new ArrayList<>(path);
+                        newPath.add(lastNode.get(i).v);
+                        queue.add(newPath);
+                    }
+                }
+            }
+        }
+    }
+
+    // private static void printGraph () {
+    //     for (Map.Entry <Integer, ArrayList<EdgeNode>> obj : map.entrySet()) {
+    //         System.out.print(obj.getKey() + " ");
+    //         ArrayList <EdgeNode> lst = obj.getValue();
+    //         for (EdgeNode data : lst) 
+    //             System.out.print ("[" + data.v + ", " + data.time + "]" + " ");
+    //         System.out.println();
+    //     }
+    // }
 }
+
+/**
+4
+2
+5
+7
+9
+4
+2 9 2
+7 2 3
+7 9 7
+9 5 1
+7
+9
+**/
