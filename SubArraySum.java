@@ -19,25 +19,23 @@ public class SubArraySum {
 class Solution {
     public ArrayList <Integer> subarray (int[] ar, int size, int s) {
         ArrayList<Integer> obj = new ArrayList<>();
-        int start = -1, end = -1;
-
-        for (int i = 0; i < size; i++) {
-            int sum = 0;
-            start = i;
-            for (int j = i; j < size; j++) {
-                sum += ar[j];
-                if (sum == s) {
-                    end = j;
-                    break;
-                }
+        
+        int curSum = ar[0];
+        int start = 0;
+        for (int i = 1; i < size; i++) {
+            while (curSum > s && start < i-1) {
+                curSum -= ar[start];
+                start++;
             }
-            if (sum == s) break;
-        } 
-        if (start != -1 && end != -1) {
-            obj.add(start + 1);
-            obj.add(end + 1);
+            if (curSum == s) {
+                obj.add(start+1);
+                obj.add(i);
+                break;
+            }
+
+            curSum += ar[i];
         }
-        else obj.add (-1);
+        if (obj.size() == 0) obj.add(-1);
         return obj;
     }
 }
