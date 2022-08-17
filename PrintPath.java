@@ -8,7 +8,6 @@ public class PrintPath {
     static Map <Integer, ArrayList <Integer>> g = new HashMap<>();
     static Map <Integer, Boolean> visited = new HashMap<>();
     private static int v;
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         v = in.nextInt();
@@ -33,6 +32,7 @@ public class PrintPath {
             else g.put (src, dest);
         }
         findPaths(7, 9);
+        // printGraph();
         in.close();
     }
 
@@ -58,7 +58,7 @@ public class PrintPath {
 
     public static void findCost (List <Integer> path) {
         int size = path.size();
-        for (int i = 0; i < size-1; i++) {
+        for (int i = 0; i < size; i++) {
             System.out.print (path.get(i) + " ");
         }
         System.out.println();
@@ -95,6 +95,12 @@ public class PrintPath {
                     }
                 }
             }
+        }
+    }
+
+    private static void printGraph () {
+        for (Map.Entry <Integer, ArrayList<Integer>> o : g.entrySet()) {
+            System.out.println (o.getKey() + " " + o.getValue());
         }
     }
 }
