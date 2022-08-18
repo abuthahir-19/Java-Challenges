@@ -12,6 +12,7 @@ public class TimeConversion {
         if (format.equals("AM")) {
             hh = hh % 12;
         }else if (format.equals ("PM")) {
+            if (hh != 12)
             hh = (hh + 12) % 24;
         }
         
