@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class SumAsPerFrequency {
@@ -9,32 +8,30 @@ public class SumAsPerFrequency {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         List <Integer> list = new ArrayList<>();
-        Map <Integer, Integer> count = new HashMap<>();
-
-        for (int i = 0; i < n; i++) {
-            int key = in.nextInt();
-            list.add(key);
-            if (count.containsKey(key)) {
-                int c = count.get(key) + 1;
-                count.put (key, c);
-            }
-            else count.put (key, 1);
+        List <Integer> res = new ArrayList<>();
+        for (int i = 0; i < n; i += 1) {
+            list.add(in.nextInt());
         }
-        
-        int query = in.nextInt();
-        for (int i = 0; i < query; i++) {
+        int max = Collections.max(list);
+        int[] a = new int[max+1];
+        for (int i = 0; i < n; i++) {
+            int ind = list.get(i);
+            a[ind] += 1;
+        }
+        int q = in.nextInt();
+        for (int i = 0; i < q; i++) {
             int start = in.nextInt();
             int end = in.nextInt();
             int sum = 0;
-            for (int j = 0; j < n; j++) {
-                int c = count.get(list.get(j));
-                if (c >= start && c <= end) {
-                    sum += list.get (j);
-                }
+            for (int j = 0; j < max+1; j++) {
+                if (a[j] >= start && a[j] <= end) sum += j;
             }
-            System.out.println (sum);
+            res.add(sum);
         }
-
+        for (int i = 0; i < max+1; i++) {
+            System.out.println(i + " -> " + a[i]);
+        }
+        System.out.println(res);
         in.close();
     }
 }
