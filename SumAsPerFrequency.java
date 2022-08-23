@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class SumAsPerFrequency {
@@ -9,29 +8,31 @@ public class SumAsPerFrequency {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         List <Integer> list = new ArrayList<>();
-        Map <Integer, Integer> count = new HashMap<>();
-
-        for (int i = 0; i < n; i += 1) {
-            int key = in.nextInt();
-            list.add(key);
-            if (count.containsKey(key)) {
-                count.put(key, count.get(key) + 1);
-            }else count.put(key, 1);
+        List <Integer> res = new ArrayList<>();
+        int[] a = new int[10000001];
+        for (int i = 0; i < n; i++) {
+            int e = in.nextInt();
+            list.add(e);
+            a[e] += 1;
         }
-        
         int q = in.nextInt();
-        for (int i = 0; i < q; i++) {
+        while (q > 0) {
             int s = in.nextInt();
             int e = in.nextInt();
             int sum = 0;
-            for (Map.Entry <Integer, Integer> o : count.entrySet()) {
-                int v = o.getValue();
-                if (v >= s && v <= e) sum += (o.getKey()*v);
+            for (int i = 0; i < list.size(); i++) {
+                int v = list.get(i);
+                int count = a[v];
+                if (count >= s && count <= e) {
+                    sum += v;
+                }
             }
-            System.out.println(i + " -> " + sum);
+            res.add(sum);
+            q -= 1;
         }
-
-        
+        for (int val : res) {
+            System.out.println (val);
+        }
         in.close();
     }
 }
