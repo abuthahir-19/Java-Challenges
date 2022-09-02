@@ -16,6 +16,7 @@ public class SameUnitDigit {
         in.close();
     }
 }
+
 /**
 6
 12 834 94 485 285 905
