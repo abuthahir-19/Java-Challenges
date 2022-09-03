@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.List;
@@ -13,8 +12,12 @@ public class NthLargest {
             ar.add(in.nextInt());
         }
         int k = 3;
-        Collections.sort(ar, Collections.reverseOrder());
-        System.out.println (ar.get(k-1));
+        while (k != 0) {
+            int max = Collections.max(ar);
+            ar.remove(ar.indexOf(max));
+            k -= 1;
+        }
+        System.out.println (Collections.max(ar));
         in.close();
     }
 }
