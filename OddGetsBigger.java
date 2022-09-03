@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,7 +15,11 @@ public class OddGetsBigger {
         }
         if (odd.size() == 0) System.out.println(0);
         else {
-            
+            Collections.sort (odd, Collections.reverseOrder());
+            for (int val : odd) {
+                System.out.print (val + "");
+            }
         }
+        in.close();
     }
 }
