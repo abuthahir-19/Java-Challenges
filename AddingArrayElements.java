@@ -8,7 +8,7 @@ public class AddingArrayElements {
         int[] ar = new int[n];
         for (int i = 0; i < n; i++)
             ar[i] = in.nextInt();
-        Solution obj = new Solution();
+        DateDisplay obj = new DateDisplay();
         int res = obj.minOperations(ar, n, k);
         // System.out.println (res);
         in.close();

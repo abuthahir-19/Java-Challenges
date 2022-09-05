@@ -1,22 +1,30 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Sample {
-    public static void main(String[] args) {
+    @Deprecated
+    public static void main(String[] args) throws ParseException {
         Scanner in = new Scanner (System.in);
-        int n = in.nextInt();
-        int[] ar = new int[n];
-        for (int i = 0; i < n; i++) {
-            ar[i] = in.nextInt();
+        String[] s= in.nextLine().split(" ");
+        String date = "";
+        for (int i = 0; i < s.length; i+=1) {
+            if (i < s.length-1)
+            date += s[i] + "-";
+            else date += s[i];
         }
-        int s = in.nextInt();
-        int e = in.nextInt();
-        int count = 0;
-        for (int i = 0; i < n; i++) {
-            if ((ar[i] >= s && ar[i] <= e) && ar[i] % 3 != 0 && ar[i] % 5 != 0) {
-                count += 1;
-            }
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+        Date d = formatter.parse(date);
+        switch (d.getDay()) {
+            case 0 : System.out.println ("Sunday".toUpperCase()); break;
+            case 1 : System.out.println ("Monday".toUpperCase()); break;
+            case 2 : System.out.println ("Tuesday".toUpperCase()); break;
+            case 3 : System.out.println ("Wednesday".toUpperCase()); break;
+            case 4 : System.out.println ("Thursday".toUpperCase()); break;
+            case 5 : System.out.println ("Friday".toUpperCase()); break;
+            case 6 : System.out.println ("Saturday".toUpperCase()); break;
         }
-        System.out.println(count);
         in.close();
     }
 }
