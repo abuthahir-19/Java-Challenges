@@ -37,6 +37,8 @@ class Solution {
         return Collections.max(products);
     }
 }
+
+
 /**
 5
 6 -10 -3 0 2
