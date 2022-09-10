@@ -13,16 +13,18 @@ public class MaximumValue {
         }
         List <Integer> values = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
-            for (int j = i+1; j < n; j++) {
-                if (i != j) {
-                    int f = a[i] - i;
-                    int s = a[j] - j;
-                    values.add(f - s);
-                }
-            }
+        for (int i = 0; i < n-1; i++) {
+            values.add(Math.abs ((a[i] - i) - (a[i+1] - (i+1))));
         }
         System.out.println(Collections.max(values));
         in.close();
     }
 }
+
+/**
+5
+9 15 4 12 13
+
+5
+-1 -2 -3 4 10
+**/
