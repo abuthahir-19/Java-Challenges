@@ -73,10 +73,12 @@ public class GraphDFS {
             addEdge(src, dest);
         }
 
-        System.out.println("DFS Traversal of the given graph starting from vertex 2 : ");
-        DFS(2);
+        // System.out.println("DFS Traversal of the given graph starting from vertex 2 : ");
+        // DFS(2);
 
-        System.out.println();
+        // System.out.println();
+        System.out.println("BFS Traversal of the givn graph starting from vertex 2 : ");
+        BFS(2);
         in.close();
     }
 }
