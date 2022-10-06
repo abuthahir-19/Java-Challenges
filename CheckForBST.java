@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.Queue;
 import java.util.LinkedList;
 
@@ -61,8 +62,27 @@ class TreeDataStructure {
         }
     }
 
-    public void printBFS () {
+    private void DFS (Node root) {
+        Stack <Node> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            Node node = stack.pop();
+            System.out.print (node.data + " ");
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+    }
+
+    public void getBFS () {
         BFS(this.root);
+    }
+
+    public void getDFS () {
+        DFS(this.root);
     }
 }
 
@@ -84,12 +104,16 @@ public class CheckForBST {
 
         System.out.println();
         System.out.println("BFS traversal of the tree : ");
-        tree.printBFS();
+        tree.getBFS();
+
+        System.out.println ();
+        System.out.println ("DFS traversal of the tree : ");
+        tree.getDFS();
         in.close();
     }
 }
 
 /**
-5
-4 3 1 2 5
+8
+5 4 3 2 1 7 6 8
 **/
