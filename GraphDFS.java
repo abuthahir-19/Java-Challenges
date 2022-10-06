@@ -34,6 +34,17 @@ public class GraphDFS {
         }
     }
     
+    public static void initialize (List <Integer> list) {
+        for (int i = 0; i < list.size(); i++) {
+            int k = list.get(i);
+            if (visited.containsKey(k)) {
+                if (visited.get(k) == true) visited.put (k, false);
+            }
+            else {
+                visited.put (k, false);
+            }
+        }
+    }
 
     public static void DFS (int start) {
         DFSUtil(start, visited);
@@ -59,24 +70,25 @@ public class GraphDFS {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int v = in.nextInt();
+        List <Integer> list = new ArrayList<>();
         for (int i = 0; i < v; i++) {
             int src = in.nextInt();
             int dest = in.nextInt();
-            if (!visited.containsKey(src))  {
-                visited.put (src, false);
-            }
-
-            if (!visited.containsKey(dest)) {
-                visited.put (dest, false);
-            }
-
+            list.add(src);
+            list.add(dest);
             addEdge(src, dest);
         }
 
-        // System.out.println("DFS Traversal of the given graph starting from vertex 2 : ");
-        // DFS(2);
+        initialize(list);
+        System.out.println("DFS Traversal of the given graph starting from vertex 2 : ");
+        DFS(2);
 
-        // System.out.println();
+
+        initialize(list);
+        System.out.println();
+
+
+
         System.out.println("BFS Traversal of the givn graph starting from vertex 2 : ");
         BFS(2);
         in.close();
