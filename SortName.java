@@ -27,7 +27,7 @@ public class SortName {
             data.put (cgpa, stud);
             n -= 1;
         }
-        Collections.sort(Collections.reverseOrder(data));
+        
         in.close();
     }
 }
