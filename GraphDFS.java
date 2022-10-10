@@ -23,17 +23,6 @@ public class GraphDFS {
         }
     }
 
-    private static void DFSUtil (int v, Map<Integer, Boolean> visited) {
-        visited.put (v, true);
-        System.out.print (v + " ");
-        Iterator <Integer> i = g.get(v).listIterator();
-        while (i.hasNext()) {
-            int n = i.next();
-            if (!visited.get(n)) 
-                DFSUtil(n, visited);
-        }
-    }
-    
     public static void initialize (List <Integer> list) {
         for (int i = 0; i < list.size(); i++) {
             int k = list.get(i);
@@ -43,6 +32,17 @@ public class GraphDFS {
             else {
                 visited.put (k, false);
             }
+        }
+    }
+
+    private static void DFSUtil (int v, Map<Integer, Boolean> visited) {
+        visited.put (v, true);
+        System.out.print (v + " ");
+        Iterator <Integer> i = g.get(v).listIterator();
+        while (i.hasNext()) {
+            int n = i.next();
+            if (!visited.get(n)) 
+                DFSUtil(n, visited);
         }
     }
 
@@ -86,7 +86,6 @@ public class GraphDFS {
 
         initialize(list);
         System.out.println();
-
 
 
         System.out.println("BFS Traversal of the givn graph starting from vertex 2 : ");
