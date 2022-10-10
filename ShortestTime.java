@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,7 +17,7 @@ class EdgeNode {
 
 public class ShortestTime {
     static Map <Integer, ArrayList<EdgeNode>> map = new HashMap<>();
-    private static List <Integer> cost = new ArrayList<>();
+    static int min = Integer.MAX_VALUE;
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -37,7 +36,7 @@ public class ShortestTime {
         int A = in.nextInt();
         int B = in.nextInt();
         findPaths(A, B);
-        System.out.println (Collections.min(cost));
+        System.out.println (min);
         in.close();
     }
 
@@ -68,7 +67,7 @@ public class ShortestTime {
                 }
             }
         }
-        cost.add(c);
+        if (c < min) min = c;
     }
 
     private static boolean isNotVisited (int key, List <Integer> path) {
