@@ -12,15 +12,16 @@ public class LinkedList {
     }
 
     public Node removeDuplicates (Node head) {
-        Node cur = head, prev = null;
-        while (cur != null) {
-            prev = cur;
-            cur = cur.next;
-            if (prev.d == cur.d) {
-                prev.next = cur.next;
+        Node curr = head;
+        while (curr != null) {
+            Node temp = curr;
+            if (temp != null && temp.d == curr.d) {
+                temp = temp.next;
             }
+            curr.next = temp;
+            curr = curr.next;
         }
-        return cur;
+        return head;
     }
 
     public boolean searchRecur (Node head, int x) {
