@@ -36,17 +36,19 @@ public class MaximizeSum {
                     f.put (max-1, mMinC);
                 }
             } else {
-                int mC = f.get(max) - 1;
+                if (f.containsKey(max)) {
+                    int mC = f.get(max) - 1;
 
-                if (mC == 0) {
-                    f.remove(max);
-                } else {
-                    f.put (max, mC);
+                    if (mC == 0) {
+                        f.remove(max);
+                    } else {
+                        f.put (max, mC);
+                    }
                 }
             }
 
             if (f.size() > 0)
-            sum = Collections.max(f.keySet());
+                max = Collections.max(f.keySet());
         }
 
         return sum;
@@ -62,6 +64,12 @@ public class MaximizeSum {
         int sum = getMaxSum (a, n);
         System.out.println ("The maximum sum that is obtained : " + sum);
         in.close();
+
+        // Map <Integer, Integer> f = new HashMap<>();
+        // f.put (1, 2);
+        // f.put(2, 10);
+
+        // System.out.println (f.get(3)-1);
     }
 }
 
