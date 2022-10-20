@@ -64,12 +64,6 @@ public class MaximizeSum {
         int sum = getMaxSum (a, n);
         System.out.println ("The maximum sum that is obtained : " + sum);
         in.close();
-
-        // Map <Integer, Integer> f = new HashMap<>();
-        // f.put (1, 2);
-        // f.put(2, 10);
-
-        // System.out.println (f.get(3)-1);
     }
 }
 
