@@ -11,6 +11,18 @@ public class LinkedList {
         }
     }
 
+    public Node moveToFront (Node head) {
+        Node lastNode = head, prev = null;
+        while (lastNode.next != null) {
+            prev = lastNode;
+            lastNode = lastNode.next;
+        }
+        prev.next = null;
+        lastNode.next = head;
+        head = lastNode;
+        return head;
+    }
+    
     public Node removeDuplicates (Node head) {
         Node curr = head;
         while (curr != null) {

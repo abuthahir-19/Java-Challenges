@@ -1,5 +1,3 @@
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,39 +14,23 @@ public class MaximizeSum {
             }
         }
 
-        int max = Arrays.stream(arr).max().getAsInt();
         int sum = 0;
-        while (f.size() > 0) {
-            sum += max;
-            if (f.containsKey (max-1)) {
-                int mC = f.get(max) -1;
-                int mMinC = f.get(max-1) - 1;
+        for (int i = n-1; i >= 0; i--) {
+            int v1 = arr[i];
+            int v2 = arr[i]-1;
+            
+            if (f.containsKey (v1)) {
+                int val = f.get(v1);
+                if (val > 0) {
+                    sum += v1;
 
-                if (mC == 0) {
-                    f.remove(max);
-                } else {
-                    f.put(max, mC);
-                }
+                    f.put (v1, f.get(v1)-1);
 
-                if (mMinC == 0) {
-                    f.remove(max-1);
-                } else {
-                    f.put (max-1, mMinC);
-                }
-            } else {
-                if (f.containsKey(max)) {
-                    int mC = f.get(max) - 1;
-
-                    if (mC == 0) {
-                        f.remove(max);
-                    } else {
-                        f.put (max, mC);
+                    if (f.containsKey(v2)) {
+                        f.put (v2, f.get(v2)-1);
                     }
                 }
             }
-
-            if (f.size() > 0)
-                max = Collections.max(f.keySet());
         }
 
         return sum;
