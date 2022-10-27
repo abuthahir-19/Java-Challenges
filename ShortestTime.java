@@ -120,13 +120,12 @@ public class ShortestTime {
 5
 7
 9
-4
+4 4
 2 9 2
 7 2 3
 7 9 7
 9 5 1
-7
-9
+7 9
 
 
 **/

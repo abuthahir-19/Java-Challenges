@@ -83,7 +83,7 @@ public class GraphDFS {
 
 
         System.out.println("BFS Traversal of the givn graph starting from vertex 2 : ");
-        BFS(2);
+        BFS(7);
         in.close();
     }
 }
