@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class Undirected {
     static Map <Integer, List <Integer>> graph = new HashMap<>();
     static Map <Integer, Integer> id = new HashMap<>();
+    static Map <Integer, Integer> size = new HashMap<>();
+
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Undirected ob = new Undirected();
@@ -23,6 +25,9 @@ public class Undirected {
             int dest = Integer.parseInt (line[1]);
             if (!id.containsKey(src)) id.put (src, Objects.hashCode(src));
             if (!id.containsKey(dest)) id.put (dest, Objects.hashCode(dest));
+
+            if (!size.containsKey(src)) size.put (src, 1);
+            if (!size.containsKey (dest)) size.put (dest, 1);
             addEdge(src, dest);
         }
         System.out.println ("Graph representation after construction : ");
@@ -34,8 +39,14 @@ public class Undirected {
             System.out.println ("Graph is\'nt contains cycle !!");
         }
 
-        System.out.println ("Identity Information : ");
-        printIDs();
+        // System.out.println ("Size information of the given Graph : ");
+
+        // for (Map.Entry <Integer, Integer> o : size.entrySet()) {
+        //     System.out.println (o.getKey() + " " +  o.getValue());
+        // }
+
+        // System.out.println ("Identity Information : ");
+        // printIDs();
     }
 
     public static void addEdge (int src, int dest) {
@@ -62,7 +73,14 @@ public class Undirected {
     public static void union (int p, int q) {
         int i = id.get(p);
         int j = id.get(q);
-        id.put (i, j);
+        if (i == j) return ;
+        else if (size.get(i) < size.get(j)) {
+            id.put (i, j);
+            size.put (j, size.getOrDefault(j, 0) + size.get(i));
+        } else {
+            id.put (j, i);
+            size.put (i, size.getOrDefault(i, 0) + size.get(j));
+        }
     }
 
     public boolean isCycle () {
@@ -120,4 +138,16 @@ public class Undirected {
 3 2
 0 1
 1 2
+
+4 3
+8 3
+3 4
+4 9
+9 8
+
+4 4
+8 3
+3 4
+4 9
+9 8
 */
