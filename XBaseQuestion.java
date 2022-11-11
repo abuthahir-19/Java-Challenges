@@ -18,6 +18,7 @@ public class XBaseQuestion {
         in.close();
     }
 }
+
 /**
 3
 4 2

@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Objects;
-// import java.util.Scanner;
 
 class HashNode <K, V> {
     K key;

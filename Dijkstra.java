@@ -91,12 +91,13 @@ public class Dijkstra {
             addEdgeWithDist(src, obj);
         }
 
-        dijkstra(7);
+        System.out.println ("Enter the source and destination vertexes : ");
+        String[] sd = bf.readLine().split(" ");
+        int srcVertex = Integer.parseInt(sd[0]);
+        int destVertex = Integer.parseInt(sd[1]);
+        dijkstra(srcVertex);
 
-        System.out.println ("The shortest distance from the given source node 0 is : ");
-        for (Map.Entry <Integer, Integer> o : dist.entrySet()) {
-            System.out.println (o.getKey() + " => " + o.getValue());
-        }
+        System.out.println ("Shortest distance from " + srcVertex + " to " + destVertex + " is : " + dist.get(destVertex));
     }
 }
 

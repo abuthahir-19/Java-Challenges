@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class LinkedList {
@@ -23,6 +26,29 @@ public class LinkedList {
         return head;
     }
     
+    public Node mergeList (Node list1, Node list2) {
+        Node currS = list2;
+        while (currS != null) {
+            Node currF = list1, prev = null;
+            while (currF != null) {
+                if (currS.d <= currF.d) break;
+                prev = currF;
+                currF = currF.next;
+            }
+
+            Node newNode = new Node(currS.d);
+            if (prev == null) {
+                newNode.next = list1;
+                list1 = newNode;
+            } else {
+                prev.next = newNode;
+                newNode.next = currF;
+            }
+            currS = currS.next;
+        }
+        return list1;
+    }
+
     public Node removeDuplicates (Node head) {
         Node curr = head;
         while (curr != null) {
@@ -118,8 +144,9 @@ public class LinkedList {
         return hd;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         LinkedList obj = new LinkedList();
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Scanner in = new Scanner(System.in);
         System.out.println ("Enter the no of elements : ");
         int n = in.nextInt();
