@@ -18,6 +18,7 @@ public class MissingValues {
         for (int i = 0; i < m; i++) {
             brr.add (in.nextInt());
         }
+        in.close();
     }
 
     public static List <Integer> getMissingValues (List <Integer> arr, List <Integer> brr) {

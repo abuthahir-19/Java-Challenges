@@ -8,14 +8,17 @@ import java.util.Scanner;
 public class Pairs {
     int getPairCount (int k, List <Integer> arr) {
         Map <Integer, Integer> c = new HashMap<>();
-        for (int i = 0; i < arr.size(); i++) {
-            c.put (arr.get (i), c.getOrDefault(arr.get (i), 0) + 1);
-        }
-        
         int count = 0;
+        Collections.sort (arr);
         for (int i = 0; i < arr.size(); i++) {
-            int diff = Math.abs (arr.get(i) - k);
-            if (c.containsKey(diff)) count += c.get (diff);
+            int value = arr.get (i);
+            int diff = Math.abs (value - k);
+            if (c.containsKey(diff)) {
+                count += 1;
+                c.put (value, c.getOrDefault(value, 0) + 1);
+            } else {
+                c.put (value, 1);
+            }
         }
         return count;
     }
@@ -32,5 +35,6 @@ public class Pairs {
         int result = ob.getPairCount (k, arr);
 
         System.out.println (result);
+        in.close();
     }
 }
