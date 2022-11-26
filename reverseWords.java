@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class reverseWords {
     public static void main(String[] args) {
@@ -17,8 +18,10 @@ public class reverseWords {
 class Solution {
     public String reverseWords (String s) {
         String res = "";
-        String[] arr = s.split("\\.");
-        // System.out.println (arr.length);
+        String[] arr = s.split(" ");
+        for (String str : arr) {
+            System.out.println (str);
+        }
         return res;
     }
 }
