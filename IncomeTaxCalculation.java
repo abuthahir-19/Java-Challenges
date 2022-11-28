@@ -24,9 +24,6 @@ public class IncomeTaxCalculation {
 
         income = init;
 
-        // System.out.println (sum);
-
-
         if (income > 5000000 && income <= 10000000) {
             sum = sum + getTaxableValue(sum, 10);
         } else if (income > 10000000 && income <= 20000000) {
@@ -37,13 +34,11 @@ public class IncomeTaxCalculation {
             sum = sum + getTaxableValue(sum, 37);
         }
 
-        // System.out.println(sum);
-
-
         if (income <= 5000000)
         return (sum + health);
         else return (sum + getTaxableValue(sum, 4));
     }
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int income = in.nextInt();
