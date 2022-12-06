@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 public class LinkedList {
     Node head;
@@ -12,6 +11,30 @@ public class LinkedList {
             d = data;
             next = null;
         }
+    }
+
+    public Node oddEvenList (Node head) {
+        Node modList = head, prev = null;
+        Node even = null, Eprev = null;;
+
+        while (modList != null) {
+            prev = modList;
+            modList = modList.next;
+            if (modList != null) {
+                Node n = new Node(modList.d);
+                modList = modList.next;
+                prev.next = modList;
+                if (even == null) {
+                    even = n;
+                    Eprev = even;
+                } else {
+                    Eprev.next = n;
+                    Eprev = n;
+                }
+            }
+        }
+        prev.next = even;
+        return head;
     }
 
     public Node moveToFront (Node head) {
@@ -147,14 +170,14 @@ public class LinkedList {
     public static void main(String[] args) throws IOException {
         LinkedList obj = new LinkedList();
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        Scanner in = new Scanner(System.in);
-        System.out.println ("Enter the no of elements : ");
-        int n = in.nextInt();
-        for (int i = 0; i < n; i++) {
-            int data = in.nextInt();
-            obj.insert(data);
+        String[] list = bf.readLine().split(" ");
+        LinkedList ob = new LinkedList();
+        for (int i = 0; i < list.length; i++) {
+            int value = Integer.parseInt (list[i]);
+            ob.insert(value);
         }
-        Node head_ref = obj.removeDuplicates(obj.head);
-        obj.printList(head_ref);
+        Node head = ob.oddEvenList(ob.head);
+        ob.printList(head);
+
     }
 }
