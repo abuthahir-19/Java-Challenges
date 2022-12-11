@@ -168,7 +168,6 @@ public class LinkedList {
     }
 
     public static void main(String[] args) throws IOException {
-        LinkedList obj = new LinkedList();
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         String[] list = bf.readLine().split(" ");
         LinkedList ob = new LinkedList();
