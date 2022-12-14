@@ -19,6 +19,6 @@ public class CheckAlphabet {
         } else {
             System.out.println ("no");
         }
-        in.close();
+        in.close(); 
     }
 }
