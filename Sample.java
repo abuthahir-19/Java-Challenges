@@ -30,7 +30,8 @@ public class Sample {
     //     }
     //     in.close();
     // }
-    public static void main(String[] args) {
+
+    public static void main (String[] args) {
         // int x = new Scanner (System.in).nextInt();
         Set <char[]> st = new HashSet<>();
         st.add ("Geeks".toCharArray());
