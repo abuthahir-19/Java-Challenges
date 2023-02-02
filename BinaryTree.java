@@ -8,85 +8,79 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class BinaryTree {
-    TreeNode root;
-
+    TreeNode root = null;
+    
     class TreeNode {
-        int key;
+        int value;
         TreeNode left;
         TreeNode right;
-        public TreeNode (int key) {
-            this.key = key;
+        public TreeNode (int value) {
+            this.value = value;
             this.left = null;
             this.right = null;
         }
     }
 
-    public void insert (int data) {
-        TreeNode temp = this.root;
-        if (temp == null) {
+    public void insertNode (TreeNode root, int data) {
+        if (root == null) {
             this.root = new TreeNode(data);
             return;
         }
         Queue <TreeNode> queue = new LinkedList<>();
-        queue.add (temp);
-        while (!queue.isEmpty()) {
-            temp = queue.remove();
-            if (temp.left == null) {
-                temp.left = new TreeNode(data);
-                break;
-            } else {
-                queue.add (temp.left);
-            }
+        queue.add (root);
 
-            if (temp.right == null) {
-                temp.right = new TreeNode(data);
-                break;
-            } else {
-                queue.add (temp.right);
-            }
-        }
-    }
-
-    public void printBFS () {
-        Queue <TreeNode> queue = new LinkedList<>();
-        queue.add (this.root);
         while (!queue.isEmpty()) {
             TreeNode n = queue.poll();
-            System.out.print (n.key + " ");
+            if (n.left == null) {
+                n.left = new TreeNode(data);
+                break;
+            }
+            else queue.add (n.left);
 
-            if (n.left != null) 
-                queue.add (n.left);
-
-            if (n.right != null) {
+            if (n.right == null) {
+                n.right = new TreeNode(data);
+                break;
+            } else {
                 queue.add (n.right);
             }
         }
     }
 
-    public void printDFS () {
+    public void insert (int data) {
+        this.insertNode(this.root, data);
+    }
+
+    public void printBFS () {
+        Queue <TreeNode> queue = new LinkedList<>();
+        queue.add (root);
+        while (!queue.isEmpty()) {
+            TreeNode n = queue.poll();
+            System.out.print (n.value + " ");
+            if (n.left != null) queue.add (n.left);
+            if (n.right != null) queue.add (n.right);
+        }
+    }
+
+    public List <Integer> getDFSTraversal () {
         Stack <TreeNode> stack = new Stack<>();
         List <Integer> sequence = new ArrayList<>();
         stack.push (this.root);
         while (!stack.isEmpty()) {
             TreeNode n = stack.pop();
+            if (n != null && n.left == null && n.right == null) sequence.add (n.value);
             if (n.right != null) stack.push (n.right);
             if (n.left != null) stack.push (n.left);
-            if (n.left == null && n.right == null) {
-                System.out.print (n.key + " ");
-            }
         }
+        return sequence;
     }
 
-    public int getSumWithinRange (int low, int high) {
+    public int getSumBtwnRange (int start, int end) {
         Queue <TreeNode> queue = new LinkedList<>();
-        queue.add (this.root);
         int sum = 0;
+        queue.add (root);
         while (!queue.isEmpty()) {
             TreeNode n = queue.poll();
-            if (n != null) {
-                if (n.key >= low && n.key <= high) sum += n.key;
-            }
-
+            if (n.value >= start && n.value <= end) sum += n.value;
             if (n.left != null) queue.add (n.left);
             if (n.right != null) queue.add (n.right);
         }
@@ -95,24 +89,26 @@ public class BinaryTree {
 
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println ("Enter list of values seperated by space : ");
-        String[] list = bf.readLine().split(" ");
+        System.out.println ("Enter list of integers seperated by space : ");
+        String[] input = bf.readLine().split(" ");
         BinaryTree ob = new BinaryTree();
-        for (int i = 0; i < list.length; i++) {
-            int value = Integer.parseInt (list[i]);
-            ob.insert(value);
+        for (int i = 0; i < input.length; i++) {
+            int data = Integer.parseInt (input[i]);
+            ob.insert(data);
         }
+        // System.out.println ("Enter the start and end range : ");
+        // String[] rnge = bf.readLine().split(" ");
+        // int low = Integer.parseInt (rnge[0]);
+        // int high = Integer.parseInt (rnge[1]);
+        // System.out.println ("Sum of elements between the range : " + ob.getSumBtwnRange(low, high));
 
-        System.out.println ("Values of the list : " );
-        ob.printBFS();;
-
-        // System.out.println ("DFS Traversal of the given list : ");
-        // ob.printDFS();
-
-        bf.close();
+        System.out.println ("List of integers which are leaf nodes : ");
+        System.out.println (ob.getDFSTraversal());
+        
+        ob.printBFS();
     }
 }
 
 /**
-3 5 1 6 2 9 8 7 4
+3 5 1 6 2 9 8 null null 7 4
  */
