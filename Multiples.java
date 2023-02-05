@@ -7,6 +7,7 @@ public class Multiples {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         int x = in.nextInt();
+        in.close();
         List <Integer> list = new ArrayList<>();
         int i, j;
         for (i = 1; i <= n; i++) {
@@ -23,6 +24,5 @@ public class Multiples {
         if (i == j) {
             System.out.print (list.get (i));
         }
-        in.close();
     }
 }
