@@ -3,6 +3,7 @@ import java.util.Scanner;
 class SinglyLinkedList {
     Invoice head ;
     Invoice tail;
+
     public SinglyLinkedList () {
         this.head = null;
         this.tail = null;
@@ -20,6 +21,23 @@ class SinglyLinkedList {
             }
             curr.next = d;
             this.tail = d;
+        }
+    }
+
+    public void removeAt (int pos) {
+        Invoice curr = this.head, prev = null;
+        if (pos == 1) {
+            this.head = curr.next;
+        } else {
+            int idx = 1;
+            while (curr != null && idx != pos) {
+                idx += 1;
+                prev = curr;
+                curr = curr.next;
+            }
+            prev.next = curr.next;
+            if (curr.next == null)
+            this.tail = prev;
         }
     }
 }
@@ -45,7 +63,14 @@ public class ListInvoice {
             sll.append(price);
         }
 
+        int M = in.nextInt();
+        while (M-- > 0) {
+            int pos = in.nextInt();
+            sll.removeAt(pos);
+        }
+        
         Invoice invoice = sll.head;
+
         while (invoice != sll.tail) {
             System.out.print (invoice.price + "->");
             invoice = invoice.next;
@@ -54,3 +79,10 @@ public class ListInvoice {
         in.close();
     }
 }
+
+/**
+5
+20 40 60 80 100
+2 
+1 4
+ */
