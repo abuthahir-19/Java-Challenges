@@ -1,6 +1,5 @@
 import java.util.Comparator;
 import java.util.Scanner;
-import java.util.Arrays;
 
 class Activity {
     int start, end;
