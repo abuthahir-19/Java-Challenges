@@ -21,6 +21,29 @@ public class BinaryTree {
         }
     }
 
+    // public List<List<Integer>> reverseOddLevels (TreeNode root) {
+    //     Queue <TreeNode> queue = new LinkedList<>();
+    //     List <List<Integer>> listSequence = new ArrayList<>();
+    //     queue.add (root);
+    //     while (!queue.isEmpty()) {
+    //         TreeNode n = queue.poll();
+    //         List <Integer> list = new ArrayList<>();
+    //         list.add (n.value);
+    //     }
+    // }
+
+    public TreeNode invertTree (TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        root.left = invertTree(right);
+        root.right = invertTree(left);
+        return root;
+    }
+
     public void insertNode (TreeNode root, int data) {
         if (root == null) {
             this.root = new TreeNode(data);
